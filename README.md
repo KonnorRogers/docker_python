@@ -4,7 +4,7 @@
 
 ### Part 1 cheatsheet
 
-```Dockerfile
+```bash
 ## List Docker CLI commands
 docker
 docker container --help
