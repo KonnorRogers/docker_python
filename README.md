@@ -25,3 +25,12 @@ docker container ls
 docker container ls --all
 docker container ls -aq
 ```
+
+### Part 2 cheatsheet
+
+```bash
+
+```
+
+```bash
+```
