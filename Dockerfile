@@ -4,6 +4,9 @@ FROM python:2.7-slim
 # Set the working dir to /app
 WORKDIR /app
 
+# Copy the current directory into /app
+COPY . /app
+
 # Install any needed packages specified in requirements.txt
 RUN pip install --trusted-host pypi.python.org -r requirements.txt
 
