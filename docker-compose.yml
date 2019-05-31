@@ -17,13 +17,13 @@ services:
       resources:
         limits:
           # Gives 10% of a CPU core to each replica
-          cpu: "0.1"
+          cpus: "0.1"
           # Each container receives 50mb of RAM
           memory: 50M
 
-        # When to restart a container
-        restart_policy:
-          condition: on-failure
+      # When to restart a container
+      restart_policy:
+        condition: on-failure
 
     # What ports to expose, 4000 is the port available to the host machine,
     # 80 is the port on the container
@@ -31,7 +31,7 @@ services:
     ports: 
       - "4000:80"
 
-    networks:
-      # webnet is a network with default settings and a load balanced overlay
-      # network. Basically, it load balances for you.
-      webnet:
+networks:
+  # webnet is a network with default settings and a load balanced overlay
+  # network. Basically, it load balances for you.
+  webnet:
