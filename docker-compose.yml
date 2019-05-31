@@ -25,11 +25,26 @@ services:
       restart_policy:
         condition: on-failure
 
-    # What ports to expose, 4000 is the port available to the host machine,
+    # What ports to expose, 80 is the port available to the host machine,
     # 80 is the port on the container
-    # The port 80 of the container is accessible on localhost:4000 of the host
+    # The port 80 of the container is accessible on localhost:80 of the host
     ports: 
-      - "4000:80"
+      - "80:80"
+    networks:
+      - webnet
+
+  # Lets you view your docker containers
+  visualizer:
+    image: dockersamples/visualizer:stable
+    ports: 
+      - "8080:8080"
+    volumes: 
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+    networks: 
+      - webnet
 
 networks:
   # webnet is a network with default settings and a load balanced overlay
