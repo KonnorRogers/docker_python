@@ -1,0 +1,37 @@
+# Defines the docker-compose file version, there are different versions
+# with different syntaxes so its important to specify
+version: "3"
+
+# This is where all the logic tieing containers together comes in
+services:
+  web:
+    # What docker image to use
+    image: paramagician/get-started:part2
+
+    # intended for deployments (obviously) with docker swarm init
+    deploy:
+      # make 5 different containers
+      replicas: 5
+
+      # defines what to give each containers 
+      resources:
+        limits:
+          # Gives 10% of a CPU core to each replica
+          cpu: "0.1"
+          # Each container receives 50mb of RAM
+          memory: 50M
+
+        # When to restart a container
+        restart_policy:
+          condition: on-failure
+
+    # What ports to expose, 4000 is the port available to the host machine,
+    # 80 is the port on the container
+    # The port 80 of the container is accessible on localhost:4000 of the host
+    ports: 
+      - "4000:80"
+
+    networks:
+      # webnet is a network with default settings and a load balanced overlay
+      # network. Basically, it load balances for you.
+      webnet:
