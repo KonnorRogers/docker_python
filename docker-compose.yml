@@ -46,6 +46,21 @@ services:
     networks: 
       - webnet
 
+  # Adds the redis official docker image to persist data
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - "/home/docker/data:/data"
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+
+    command: redis-server --appendonly yes
+    networks:
+      - webnet
+
 networks:
   # webnet is a network with default settings and a load balanced overlay
   # network. Basically, it load balances for you.
